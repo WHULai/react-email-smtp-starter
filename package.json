@@ -1,0 +1,26 @@
+{
+  "name": "react-email-smtp-starter",
+  "description": "A small React Email + Nodemailer SMTP starter for writing and sending HTML emails.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "send": "tsx src/send.tsx",
+    "render": "MAIL_DRY_RUN=true tsx src/send.tsx",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "dotenv": "16.4.7",
+    "nodemailer": "8.0.7",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-email": "6.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.17",
+    "@types/nodemailer": "8.0.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3"
+  }
+}
