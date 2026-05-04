@@ -91,7 +91,7 @@ Template-specific content such as the example recipient name and CTA URL is kept
 The current send script imports this template:
 
 ```ts
-import { ReactEmailTrial } from './emails/react-email-trial';
+import { ReactEmailTrial as EmailTemplateSource } from './emails/react-email-trial';
 ```
 
 If you create a new template, update `src/send.tsx` to import and render that component instead.

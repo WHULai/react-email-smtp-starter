@@ -3,9 +3,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { config as loadEnv } from 'dotenv';
 import nodemailer from 'nodemailer';
+import type { ComponentType } from 'react';
 import { createElement } from 'react';
 import { render } from 'react-email';
-import { ReactEmailTrial } from './emails/react-email-trial';
+import { ReactEmailTrial as EmailTemplateSource } from './emails/react-email-trial';
 
 const rootDir = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -39,6 +40,12 @@ const splitRecipients = (value: string) =>
     .map((recipient) => recipient.trim())
     .filter(Boolean);
 
+type EmailProps = Record<string, unknown>;
+type EmailComponent = ComponentType<EmailProps> & {
+  PreviewProps?: EmailProps;
+};
+const EmailTemplate = EmailTemplateSource as unknown as EmailComponent;
+
 const smtpHost = env('SMTP_HOST', 'smtp.vip.163.com');
 const smtpPort = Number(env('SMTP_PORT', '465'));
 const smtpUser = env('SMTP_USER');
@@ -52,10 +59,10 @@ if (recipients.length === 0) {
   throw new Error('MAIL_TO must contain at least one recipient.');
 }
 
-const emailElement = createElement(ReactEmailTrial, {
-  ctaUrl: 'https://react.email',
-  name: 'Future',
-});
+const emailElement = createElement(
+  EmailTemplate,
+  EmailTemplate.PreviewProps ?? {},
+);
 
 const [html, text] = await Promise.all([
   render(emailElement),
