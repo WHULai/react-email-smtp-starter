@@ -113,6 +113,8 @@ out/preview.txt
 
 Open `out/preview.html` in a browser to inspect the rendered email before sending.
 
+![](preview.jpg)
+
 ## Send an Email
 
 After `.env.local` is configured:
